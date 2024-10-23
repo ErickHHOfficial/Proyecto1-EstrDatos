@@ -37,7 +37,6 @@ void datoPE(int i){                        //función que realiza la asignación
 
     for(int i = 0; i < 20; i++){       //ciclo FOR que llama a la función de asignación
         datoPE(i);
-        cout << estudiantes[i].anio << endl;
     }
 
 return 0;
