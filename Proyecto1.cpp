@@ -42,88 +42,37 @@ void OrdenarPorNotas(datosEs estudiantes[], int numEstudiantes){
 }
 
 string determinarMateria(int codmat){ //determina las materias en el orden que se agregaron originalmente a carrera[10]
-    string materia;
-    switch(codmat){
-        case 1:
-            materia = "Desarrollo & Gestión de Soft.";
-            break;
-
-        case 2:
-            materia = "Ing. de Soft.";
-            break;
-        
-        case 3:
-            materia = "Ing. Industrial";
-            break;
-        
-        case 4: 
-            materia = "Ing. en Alimentos";
-            break;
-        
-        case 5:
-            materia = "Logística & Transporte Multimodal";
-            break;
-        
-        case 6:
-            materia = "Ing. Civil";
-            break;
-
-        case 7:
-            materia = "Ing. Electromecánica";
-            break;
-        
-        case 8:
-            materia = "Ciberseguridad";
-            break;
-        
-        case 9:
-            materia = "Refrigeración & AC";
-            break;
-        
-        case 10:
-            materia = "Ing. Marítima Portuaria";
-            break;
-        default:
-            cout << "incorrecto";
-        
-    }   
+    string materia = carrera[codmat - 1];
     return materia;
 }   
 
-void imprimirTop5SegunCarrera(int codmat){ //trata de encontrar los mejores estudiantes (si hay o no hay más de 5) en toda la lista de estudiantes SEGUN LA CARRERA INDICADA
-    int conta = 1;
-    while(conta <= 5){
-        for(int i = 0; i < numes; i++){ //volver a imprimir
-            if(estudiantes[i].indice >= 2.5 && estudiantes[i].carrera == determinarMateria(codmat)){
-                cout << estudiantes[i].nombre << "  ";
-                cout << estudiantes[i].mNacimiento << "  ";
-                cout << estudiantes[i].carrera << "  "; //test
-                cout << estudiantes[i].indice;
-                cout << endl;
+void imprimirTop5Carrera(int codmat){ //encuentra los mejores estudiantes (si hay o no hay más de 5) en toda la lista de estudiantes SEGUN LA CARRERA INDICADA
+    OrdenarPorNotas(estudiantes, numes);
+    for(int i = 0; i < 5; i++){ //volver a imprimir
+        if(estudiantes[i].indice >= 2.5 && estudiantes[i].carrera == determinarMateria(codmat)){
+            cout << estudiantes[i].nombre << "  ";
+            cout << estudiantes[i].mNacimiento << "  ";
+            cout << estudiantes[i].carrera << "  "; //test
+            cout << estudiantes[i].indice;
+            cout << endl;
             }
-            conta++;
         }
     }
-}
 
-void imprimirTop5(){ //trata de encontrar los mejores estudiantes (si hay o no hay más de 5) en toda la lista de estudiantes
-    int conta = 1;
-    while(conta <= 5){
-        for(int i = 0; i < numes; i++){ //volver a imprimir
-            if(estudiantes[i].indice >= 2.5){
-                cout << estudiantes[i].nombre << "  ";
-                cout << estudiantes[i].mNacimiento << "  ";
-                cout << estudiantes[i].carrera << "  "; //test
-                cout << estudiantes[i].indice;
-                cout << endl;
-            }
-            conta++;
+void imprimirTop5Global(){ //trata de encontrar los mejores estudiantes (si hay o no hay más de 5) en toda la lista de estudiantes
+    OrdenarPorNotas(estudiantes, numes);
+    for(int i = 0; i < 5; i++){ //volver a imprimir
+         if(estudiantes[i].indice >= 2.5){
+            cout << estudiantes[i].nombre << "  ";
+            cout << estudiantes[i].mNacimiento << "  ";
+            cout << estudiantes[i].carrera << "  "; //test
+            cout << estudiantes[i].indice;
+            cout << endl;
         }
     }
 }
 
 void imprimirTodos(){ //imprime a todos los estudiantes en la lista (test)
-
     for(int i = 0; i < numes; i++){ //volver a imprimir
         cout << estudiantes[i].nombre << "  ";
         cout << estudiantes[i].mNacimiento << "  ";
@@ -134,7 +83,6 @@ void imprimirTodos(){ //imprime a todos los estudiantes en la lista (test)
 }
 
  int main(){
-
     int codmat = 0;
     int num = 0;
     srand((unsigned) time(NULL));
@@ -142,10 +90,8 @@ void imprimirTodos(){ //imprime a todos los estudiantes en la lista (test)
     for(int i = 0; i < 20; i++){     //ciclo FOR que llama a la función de asignación
         datoPE(i);
     }
-    OrdenarPorNotas(estudiantes, numes);
 
     imprimirTodos();
-
     cout << endl;
     
     cout << "escriba 1 para Top 5 global, 2 para top 5 por carrera: ";
@@ -154,17 +100,19 @@ void imprimirTodos(){ //imprime a todos los estudiantes en la lista (test)
     
     switch(num){
         case 1:
-            imprimirTop5();
+            cout << "TOP 5 ESTUDIANTES EN LA UTP" << endl;
+            imprimirTop5Global();
             break;
-
         case 2:
-            cout << "Introduzca codigo carrera: ";
-            for(int x = 0; x < 10; x++){
-                cout << (x+1) <<": " << carrera[x] <<endl;
+            cout << "Introduzca codigo de carrera: ";
+            for(int x = 0; x < 9; x++){
+                cout << (x+1) << ": " << carrera[x] << endl;
             }
             cin >> codmat;
-            imprimirTop5SegunCarrera(codmat);
+            cout << "TOP 5 ESTUDIANTES EN LA CARRERA: " << carrera[codmat] << endl;
+            imprimirTop5Carrera(codmat);
             break;
     }
     return 0;
 }
+
