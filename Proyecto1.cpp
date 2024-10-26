@@ -1,4 +1,5 @@
 #include<iostream>
+#include<string>
 #include<string.h>           //libreria para uso del string
 #include<random>             //libreria para uso del rand()
 #include<ctime>             //libreria que apoya al generador de la "seed" inicial (srand())
