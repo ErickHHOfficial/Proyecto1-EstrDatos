@@ -115,4 +115,3 @@ void imprimirTodos(){ //imprime a todos los estudiantes en la lista (test)
     }
     return 0;
 }
-
